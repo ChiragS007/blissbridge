@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./LoginPage.css";
 
 const LoginPage = () => {
+    // State variables for the username and password
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Prevent page reload
+        console.log("Username:", username, "Password:", password);
+        // You can add your backend logic here (e.g., send the data to your backend API)
+    };
+
     return (
         <div className="login-page">
             <div className="left-section">
@@ -13,14 +24,21 @@ const LoginPage = () => {
             </div>
             <div className="right-section">
                 <h1 className="login-title">Login</h1>
-                <form className="login-form">
+                <form className="login-form" onSubmit={handleSubmit}>
                     <div className="input-group">
                         <label htmlFor="username">
               <span role="img" aria-label="user">
                 👤
               </span>
                         </label>
-                        <input type="text" id="username" placeholder="Username" required />
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="Username"
+                            required
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)} // Update username state
+                        />
                     </div>
                     <div className="input-group">
                         <label htmlFor="password">
@@ -33,6 +51,8 @@ const LoginPage = () => {
                             id="password"
                             placeholder="Password"
                             required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)} // Update password state
                         />
                     </div>
                     <button type="submit" className="login-button">
